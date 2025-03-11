@@ -1,6 +1,14 @@
 const express = require('express');
 const axios = require('axios');
 
+// ✅ Declare `public_users` first before using it
+const public_users = express.Router();
+
+let books = require("./booksdb.js");
+let isValid = require("./auth_users.js").isValid;
+let users = require("./auth_users.js").users;
+
+// ✅ Now `public_users` is declared before use
 public_users.get('/', async (req, res) => {
     try {
         // Simulate fetching books asynchronously
@@ -11,14 +19,7 @@ public_users.get('/', async (req, res) => {
     }
 });
 
-let books = require("./booksdb.js");
-let isValid = require("./auth_users.js").isValid;
-let users = require("./auth_users.js").users;
-const public_users = express.Router();
-
-
 public_users.post("/register", (req,res) => {
-  //Write your code here
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
@@ -27,9 +28,7 @@ public_users.get('/', (req, res) => {
     res.json(JSON.stringify(books, null, 2));
 });
 
-
-// Get book details based on ISBN using premises
-
+// Get book details based on ISBN using Promises
 public_users.get('/isbn/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
@@ -45,9 +44,7 @@ public_users.get('/isbn/:isbn', (req, res) => {
     .catch(error => res.status(404).json({ message: error }));
 });
 
-
-  
-// Get book details based on author using premises
+// Get book details based on author using Promises
 public_users.get('/author/:author', (req, res) => {
     const author = req.params.author;
 
@@ -63,10 +60,7 @@ public_users.get('/author/:author', (req, res) => {
     .catch(error => res.status(404).json({ message: error }));
 });
 
-
-
-
-// Get all books based on title using premises
+// Get all books based on title using Promises
 public_users.get('/title/:title', (req, res) => {
     const title = req.params.title;
 
@@ -82,11 +76,8 @@ public_users.get('/title/:title', (req, res) => {
     .catch(error => res.status(404).json({ message: error }));
 });
 
-
-
-//  Get book review
-public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
+// Get book review (Not implemented yet)
+public_users.get('/review/:isbn', (req, res) => {
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
