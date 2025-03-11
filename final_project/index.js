@@ -18,6 +18,10 @@ app.use("/customer/auth/*", function auth(req, res, next) {
     }
 });
 
+app.get("/books", (req, res) => {
+    res.json(books);
+});
+
  
 const PORT =5001;
 
